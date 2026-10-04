@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Run unit tests
-        run: npm test
+        run: npm test -- --runInBand
 
       - name: Clean build directory
         run: |
