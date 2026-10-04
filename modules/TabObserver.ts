@@ -379,3 +379,5 @@ if (typeof global !== "undefined") global.TabObserver = TabObserver;
 if (typeof globalThis !== "undefined") globalThis.TabObserver = TabObserver;
 // @ts-ignore
 if (typeof window !== "undefined") window.TabObserver = TabObserver;
+// @ts-ignore
+if (typeof module !== "undefined" && module.exports) module.exports = { TabObserver };

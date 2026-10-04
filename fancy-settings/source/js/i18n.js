@@ -1,8 +1,3 @@
-//
-// Copyright (c) 2011 Frank Kohlhepp
-// https://github.com/frankkohlhepp/fancy-settings
-// License: LGPL v2.1
-//
 (function () {
     var lang = navigator.language.split("-")[0];
     if (this.i18n === undefined) { this.i18n = {}; }

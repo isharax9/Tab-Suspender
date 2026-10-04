@@ -61,11 +61,14 @@ const mockTabs = {
 
 const mockWindows = {
   getAll: jest.fn().mockImplementation((options, callback) => {
+    const cb = typeof options === 'function' ? options : callback;
     const mockWindow = {
       id: 1,
       tabs: [mockTab]
     };
-    callback([mockWindow]);
+    if (typeof cb === 'function') {
+      cb([mockWindow]);
+    }
   })
 };
 
@@ -163,9 +166,40 @@ const NodeTextDecoder = require('util').TextDecoder;
 // Mock global functions and variables
 global.btoa = jest.fn((str: string) => Buffer.from(str).toString('base64'));
 global.atob = jest.fn((str: string) => Buffer.from(str, 'base64').toString());
-// Spy on setInterval/clearInterval to track calls while keeping real functionality
-jest.spyOn(global, 'setInterval');
-jest.spyOn(global, 'clearInterval');
+// Track all intervals created during tests and automatically clean them up in afterEach
+const activeIntervals = new Set<any>();
+const origSetInterval = global.setInterval.bind(global);
+const origClearInterval = global.clearInterval.bind(global);
+
+const trackedSetInterval = jest.fn((callback: any, ms?: number, ...args: any[]) => {
+  const id = origSetInterval(callback, ms, ...args);
+  activeIntervals.add(id);
+  return id;
+});
+
+const trackedClearInterval = jest.fn((id: any) => {
+  activeIntervals.delete(id);
+  origClearInterval(id);
+});
+
+(global as any).setInterval = trackedSetInterval;
+(global as any).clearInterval = trackedClearInterval;
+if (typeof window !== 'undefined') {
+  (window as any).setInterval = trackedSetInterval;
+  (window as any).clearInterval = trackedClearInterval;
+}
+if (typeof globalThis !== 'undefined') {
+  (globalThis as any).setInterval = trackedSetInterval;
+  (globalThis as any).clearInterval = trackedClearInterval;
+}
+
+afterEach(() => {
+  for (const id of activeIntervals) {
+    origClearInterval(id);
+  }
+  activeIntervals.clear();
+});
+
 const ensureDateNowMock = () => {
   if (typeof (global as any).Date?.now?.mockReturnValue !== 'function') {
     const mock = jest.fn(() => 1640995200000);
@@ -177,6 +211,10 @@ const ensureDateNowMock = () => {
 ensureDateNowMock();
 beforeEach(() => {
   ensureDateNowMock();
+});
+
+process.on('unhandledRejection', (reason: any) => {
+  console.error('Unhandled Promise Rejection in test:', reason?.stack || reason);
 });
 
 // Mock additional global functions required by the modules

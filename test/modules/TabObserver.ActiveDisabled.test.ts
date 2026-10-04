@@ -113,8 +113,8 @@ describe('TabObserver - active: false disables auto-suspension', () => {
     TabManager = TabManagerModule.TabManager;
     (global as any).TabManager = TabManager;
 
-    require('../../modules/TabObserver');
-    TabObserverClass = (global as any).TabObserver || eval('TabObserver');
+    const tabObserverMod = require('../../modules/TabObserver');
+    TabObserverClass = tabObserverMod.TabObserver || (global as any).TabObserver;
 
     tabManager = new TabManager();
 

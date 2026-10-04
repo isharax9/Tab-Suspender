@@ -128,11 +128,9 @@ describe('TabObserver - Active Tab with Audible Bug', () => {
     // Make TabManager available globally (required by TabObserver)
     (global as any).TabManager = TabManager;
 
-    // Load TabObserver module - it defines TabObserver class globally
-    require('../../modules/TabObserver');
-
-    // Get TabObserver from global scope (it's defined without export/import as per project rules)
-    TabObserverClass = (global as any).TabObserver || eval('TabObserver');
+    // Load TabObserver module
+    const tabObserverMod = require('../../modules/TabObserver');
+    TabObserverClass = tabObserverMod.TabObserver || (global as any).TabObserver;
 
     // Create TabManager instance
     tabManager = new TabManager();

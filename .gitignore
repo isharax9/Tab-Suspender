@@ -19,3 +19,6 @@ test/puppeteer/.test-state.json
 
 # Graphify local build artifacts & cache
 graphify-out/
+
+#Logs
+logs/

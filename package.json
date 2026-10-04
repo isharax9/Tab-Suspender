@@ -8,8 +8,8 @@
     "build": "rm -rf ./build_dir/* && copy-files-from-to --silent && tsc --build ./",
     "copy-files-from-to": "copy-files-from-to",
     "package": "npm run build && rm -f ./build_dir/tsconfig.tsbuildinfo && cd build_dir && zip -r ../tab-suspender-unpacked.zip . && cd ..",
-    "test": "jest --forceExit",
-    "testCacheCreate": "jest --cache --silent"
+    "test": "jest --runInBand --forceExit --verbose",
+    "testCacheCreate": "jest --cache --runInBand --silent"
   },
   "copyFiles": [
     {

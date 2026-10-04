@@ -1,8 +1,3 @@
-//
-// Copyright (c) 2011 Frank Kohlhepp
-// https://github.com/frankkohlhepp/store-js
-// License: MIT-license
-//
 
 const SETTINGS_STORAGE_NAMESPACE = 'tabSuspenderSettings'; /* Also has duplicats in fancy-settings/../settings.js */
 
