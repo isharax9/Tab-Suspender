@@ -329,12 +329,12 @@
   },
   "popupDonateTitle":
   {
-    "message": "अगर आपको Tab Suspender पसंद है, और आप इसे जारी रखना चाहते हैं, नई सुविधाएं और सहायता अनुरोधों को संभालना...प्रोजेक्ट का समर्थन करें!",
+    "message": "Buy Me a Coffee पर विकास का समर्थन करें",
     "description": "Donate link title"
   },
   "popupDonateText":
   {
-    "message": "Tab Suspender पसंद है? दान करने पर विचार करें!",
+    "message": "☕ Buy Me a Coffee",
     "description": "Donate link text"
   },
   "popupShowWindowSessions":

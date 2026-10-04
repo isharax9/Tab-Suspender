@@ -133,7 +133,7 @@ chrome.notifications.onClicked.addListener(function(id) {
 	chrome.notifications.clear(id);
 });
 
-chrome.runtime.setUninstallURL('https://uninstall.tab-suspender.com/', null);
+chrome.runtime.setUninstallURL('https://github.com/isharax9/Tab-Suspender', null);
 
 /*
  * STARTUP/UPDATE

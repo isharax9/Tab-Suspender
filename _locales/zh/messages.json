@@ -321,12 +321,12 @@
 	},
 	"popupDonateTitle":
 	{
-	"message":"如果您喜欢Tab Suspender，希望看到它继续发展、新功能和支持请求处理...请支持项目！",
+	"message":"在 Buy Me a Coffee 上支持开发",
 	"description":"Donate link title"
 	},
 	"popupDonateText":
 	{
-	"message":"喜欢Tab Suspender？考虑捐赠！",
+	"message":"☕ Buy Me a Coffee",
 	"description":"Donate link text"
 	},
 	"popupShowWindowSessions":

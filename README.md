@@ -1,31 +1,52 @@
 # Tab Suspender Chrome Extension
 
-### 🟢 Released [2.0.7](https://github.com/sergey-drpa/Tab-Suspender/releases/tag/2.0.7) for testing with huge fixes + added some unit tests, and finally, tests have been implemented on a real Chrome browser using puppeteer 🎉🎉🎉.
-Release 2.0.7 on Chrome Store will be available after some weeks.
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-Donate-yellow.svg)](https://www.buymeacoffee.com/macstudyroom)
+[![GitHub](https://img.shields.io/badge/GitHub-isharax9%2FTab--Suspender-blue?logo=github)](https://github.com/isharax9/Tab-Suspender)
 
---
+Automatically suspend, park, and hibernate inactive tabs to save up to 80% of memory, reduce load on your device, save battery, and reduce heat.
 
-### Released Tab Suspender 2.0.4 https://github.com/sergey-drpa/Tab-Suspender/releases/tag/2.0.4
-
---
-
-### ⚠️ Working on complete test cases with real Chrome browser using puppeteer https://pptr.dev/ solution, it allow to test automates scenarios on real Chrome, and to cover real Chrome behaviour cases.
-### It takes match time research.
-### And now in final stage.
-### I think it would be done in 2-3 weeks.
-### Thanks for patience)
+If you like to use many open tabs at once, Tab Suspender helps accelerate your browser and frees up memory automatically.
 
 ---
 
-### Alfa/Beta releases available here: https://github.com/sergey-drpa/Tab-Suspender/releases.
+## Features
 
-Chrome Store: https://chromewebstore.google.com/detail/tab-suspender/fiabciakcmgepblmdkmemdbbkilneeeh
+- **Automated Tab Suspension:** Frees memory by automatically suspending inactive tabs after a configurable timeout.
+- **Whitelist & Ignore Rules:** Keep essential domains, active audio/video tabs, pinned tabs, or forms from being suspended.
+- **Privacy First:** Completely local tab management with no external tracking or transmission of your browsing history.
+- **Customizable Shortcuts & Settings:** Manage tab suspension with configurable hotkeys and options.
+- **Session Restoration & Tab History:** Easily restore closed or suspended tabs and sessions.
 
-Site: https://www.tab-suspender.com/
+---
 
-Automatically suspend, park, hibernate inactive tabs and save up to 80% of memory, reduce load on your device, battery and heat.
+## Installation & Sideloading (Developer Mode)
 
-If you like to use many open Tabs at once - this extension will help you and automatically accelerate your browser and purge the memory.
-	
-Extension suspend, park, hibernate inactive tabs and save up to 80% of memory.  
+### Load Unpacked Extension:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/isharax9/Tab-Suspender.git
+   cd Tab-Suspender
+   ```
+2. Install dependencies and build the extension:
+   ```bash
+   npm install
+   npm run package
+   ```
+3. Open Chrome and navigate to `chrome://extensions/`.
+4. Enable **Developer mode** in the top right corner.
+5. Click **Load unpacked** and select the `build_dir/` folder (or unzip `tab-suspender-unpacked.zip` generated in the root).
 
+---
+
+## Support & Connect
+
+- **Buy Me a Coffee:** [buymeacoffee.com/macstudyroom](https://www.buymeacoffee.com/macstudyroom)
+- **GitHub:** [@isharax9](https://github.com/isharax9)
+- **Twitter / X:** [@isharax9](https://twitter.com/isharax9)
+- **LinkedIn:** [isharax9](https://www.linkedin.com/in/isharax9/)
+
+---
+
+## License
+
+[MIT](LICENSE)

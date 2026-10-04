@@ -348,14 +348,8 @@ class BGMessageListener {
 			} else if (request.method === '[AutomaticTabCleaner:removeUrlFromWhitelist]') {
 				void whiteList.removeUrlFromWhitelist(request.url);
 			} else if (request.method === '[AutomaticTabCleaner:donate]') {
-				/*google.payments.inapp.buy({
-					'parameters': { 'env': 'prod' },
-					'sku': 'ts_user_donation_level_4',
-					'success': console.log,
-					'failure': console.log
-				});*/
 				chrome.tabs.create({
-					url: 'https://www.patreon.com/TabSuspender'
+					url: 'https://www.buymeacoffee.com/macstudyroom'
 				}).catch(console.error);
 			} else if (request.method === '[AutomaticTabCleaner:getFormRestoreDataAndRemove]') {
 				formRestoreController.getFormRestoreDataAndRemove(sender.tab.id).then(data => {

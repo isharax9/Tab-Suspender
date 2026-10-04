@@ -1,4 +1,4 @@
-﻿{
+{
   "extName":
   {
     "message": "Tab Suspender",
@@ -329,12 +329,12 @@
   },
   "popupDonateTitle":
   {
-    "message": "Если вам нравится Tab Suspender и вы хотите видеть его развитие, новые функции и поддержку...поддержите проект!",
+    "message": "Поддержать разработку на Buy Me a Coffee",
     "description": "Donate link title"
   },
   "popupDonateText":
   {
-    "message": "Нравится Tab Suspender? Поддержите проект!",
+    "message": "☕ Buy Me a Coffee",
     "description": "Donate link text"
   },
   "popupShowWindowSessions":
