@@ -15,3 +15,6 @@ build_dir/
 test/puppeteer/.test-session*
 test/puppeteer/.test-state.json
 /test/puppeteer/test-session/
+
+# Graphify local build artifacts & cache
+graphify-out/
