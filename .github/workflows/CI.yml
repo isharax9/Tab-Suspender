@@ -1,39 +1,79 @@
-name: CI
-on: push
+name: CI/CD - Build & Package Extension
+
+on:
+  push:
+    branches: [ '**' ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ '**' ]
+  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
+    name: Build & Package Extension
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: 'npm'
-      - name: Install modules
+
+      - name: Install dependencies
         run: npm ci
 
-      - name: Debug test environment
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Clean build directory
         run: |
-          echo "Node version: $(node --version)"
-          echo "NPM version: $(npm --version)"
-          echo "Test files found:"
-          find test -name "*.test.*" | sort
-          echo "Jest config:"
-          cat jest.config.cjs
+          rm -f build_dir/tsconfig.tsbuildinfo
 
-      - name: Prepare Jest cache
-        run: npm run testCacheCreate
-        continue-on-error: true
+      - name: Extract Extension Version
+        id: ext_version
+        run: |
+          VERSION=$(node -p "require('./build_dir/manifest.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Building Tab Suspender version: $VERSION"
 
-      - name: Run tests with verbose output
-        run: npm test -- --verbose
+      - name: Package extension as zip
+        run: |
+          cd build_dir
+          zip -r ../tab-suspender-v${{ env.VERSION }}-unpacked.zip .
+          cd ..
 
-      - run: npm run build --if-present
+      - name: Upload Unpacked Directory Artifact (Load unpacked)
+        uses: actions/upload-artifact@v4
+        with:
+          name: tab-suspender-v${{ env.VERSION }}-unpacked
+          path: build_dir/
+          if-no-files-found: error
+
+      - name: Upload Extension Zip Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: tab-suspender-v${{ env.VERSION }}-zip
+          path: tab-suspender-v${{ env.VERSION }}-unpacked.zip
+          if-no-files-found: error
+
+      - name: Publish to GitHub Releases (Tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: tab-suspender-v${{ env.VERSION }}-unpacked.zip
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
 
   puppeteer-tests:
     runs-on: ubuntu-latest

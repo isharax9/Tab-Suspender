@@ -20,6 +20,7 @@
   "exclude":[
     "./node_modules",
     "./jest.config.js",
+    "./jest.config.cjs",
     "./test"
   ]
 }
