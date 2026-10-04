@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2017 Sergey Zadorozhniy. The content presented herein may not, under any circumstances,
- * be reproduced in whole or in any part or form without written permission from Sergey Zadorozhniy.
- * Zadorozhniy.Sergey@gmail.com
- */
 
 interface FormRestoreInfo {
 	formData: string;

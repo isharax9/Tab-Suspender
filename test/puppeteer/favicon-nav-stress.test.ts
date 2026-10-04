@@ -36,14 +36,14 @@ import type { Browser } from 'puppeteer';
 const __dirname   = path.dirname(fileURLToPath(import.meta.url));
 const SESSION_DIR = path.join(__dirname, 'test-session', '.test-session-favicon-stress');
 
-const REPO_ROOT   = 'https://github.com/sergey-drpa/gpu-code-docker';
+const REPO_ROOT   = 'https://github.com/isharax9/Tab-Suspender';
 const REPO_PAGES  = [
-  'https://github.com/sergey-drpa/gpu-code-docker',
-  'https://github.com/sergey-drpa/gpu-code-docker/blob/main/docker-compose.yaml',
-  'https://github.com/sergey-drpa/gpu-code-docker/blob/main/README.md',
-  'https://github.com/sergey-drpa/gpu-code-docker/blob/main/Dockerfile',
-  'https://github.com/sergey-drpa/gpu-code-docker/commits/main',
-  'https://github.com/sergey-drpa',
+  'https://github.com/isharax9/Tab-Suspender',
+  'https://github.com/isharax9/Tab-Suspender/blob/master/package.json',
+  'https://github.com/isharax9/Tab-Suspender/blob/master/README.md',
+  'https://github.com/isharax9/Tab-Suspender/blob/master/manifest.json',
+  'https://github.com/isharax9/Tab-Suspender/commits/master',
+  'https://github.com/isharax9',
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -236,7 +236,7 @@ async function main(): Promise<void> {
     // Round 2 — navigate into a sub-page then suspend
     // ══════════════════════════════════════════════════════════════════════════
     log('\n━━ Round 2: navigate to docker-compose.yaml then suspend ━━━━━━━━━━━━━');
-    const subUrl = 'https://github.com/sergey-drpa/gpu-code-docker/blob/main/docker-compose.yaml';
+    const subUrl = 'https://github.com/isharax9/Tab-Suspender/blob/master/package.json';
     await safeEval(browser, `chrome.tabs.update(${tabId}, { url: ${JSON.stringify(subUrl)} })`);
     await sleep(5000); // Let page and favicon fully load
     await bgPage.bringToFront();
@@ -251,9 +251,9 @@ async function main(): Promise<void> {
     // ══════════════════════════════════════════════════════════════════════════
     log('\n━━ Round 3: 3-hop navigation then suspend ━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     for (const url of [
-      'https://github.com/sergey-drpa/gpu-code-docker/blob/main/README.md',
-      'https://github.com/sergey-drpa/gpu-code-docker/commits/main',
-      'https://github.com/sergey-drpa/gpu-code-docker',
+      'https://github.com/isharax9/Tab-Suspender/blob/master/README.md',
+      'https://github.com/isharax9/Tab-Suspender/commits/master',
+      'https://github.com/isharax9/Tab-Suspender',
     ]) {
       await safeEval(browser, `chrome.tabs.update(${tabId}, { url: ${JSON.stringify(url)} })`);
       await sleep(3000);
@@ -293,7 +293,7 @@ async function main(): Promise<void> {
     // Open a second GitHub tab
     const page2 = await browser.newPage();
     await page2.goto(
-      'https://github.com/sergey-drpa/gpu-code-docker/blob/main/docker-compose.yaml',
+      'https://github.com/isharax9/Tab-Suspender/blob/master/package.json',
       { waitUntil: 'domcontentloaded', timeout: 20000 }
     ).catch(e => log(`  page2 nav: ${(e as Error).message}`));
     await sleep(2000);

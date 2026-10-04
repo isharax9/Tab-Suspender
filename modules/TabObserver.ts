@@ -375,3 +375,7 @@ class TabObserver {
 
 // @ts-ignore
 if (typeof global !== "undefined") global.TabObserver = TabObserver;
+// @ts-ignore
+if (typeof globalThis !== "undefined") globalThis.TabObserver = TabObserver;
+// @ts-ignore
+if (typeof window !== "undefined") window.TabObserver = TabObserver;

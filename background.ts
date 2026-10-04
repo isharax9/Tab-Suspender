@@ -1,11 +1,5 @@
-/*
- * Copyright (c) 2015 Sergey Zadorozhniy. The content presented herein may not, under any circumstances,
- * be reproduced in whole or in any part or form without written permission from Sergey Zadorozhniy.
- * Zadorozhniy.Sergey@gmail.com
- */
 'use strict';
 
-const Copyright = 'Copyright (c) 2015 Sergey Zadorozhniy. The content presented herein may not, under any circumstances, be reproduced in whole or in any part or form without written permission from Sergey Zadorozhniy. Zadorozhniy.Sergey@gmail.com';
 const TS_SESSION_ID_KEY = 'TSSessionId';
 
 const TSSessionId = Date.now();
@@ -238,7 +232,6 @@ function drawSetupWizardDialog() {
  */
 function start() {
 
-	console.log(Copyright);
 
 	if (debug)
 		console.warn('********************************************************************************************************');

@@ -166,7 +166,18 @@ global.atob = jest.fn((str: string) => Buffer.from(str, 'base64').toString());
 // Spy on setInterval/clearInterval to track calls while keeping real functionality
 jest.spyOn(global, 'setInterval');
 jest.spyOn(global, 'clearInterval');
-(global as any).Date.now = jest.fn(() => 1640995200000); // Fixed timestamp for testing
+const ensureDateNowMock = () => {
+  if (typeof (global as any).Date?.now?.mockReturnValue !== 'function') {
+    const mock = jest.fn(() => 1640995200000);
+    (global as any).Date.now = mock;
+    if (typeof globalThis !== 'undefined') (globalThis as any).Date.now = mock;
+    if (typeof window !== 'undefined') (window as any).Date.now = mock;
+  }
+};
+ensureDateNowMock();
+beforeEach(() => {
+  ensureDateNowMock();
+});
 
 // Mock additional global functions required by the modules
 (global as any).trackErrors = jest.fn();

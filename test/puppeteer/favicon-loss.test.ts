@@ -40,7 +40,7 @@ import { createTestRunner } from './base/AssertHelper.js';
 
 const __dirname   = path.dirname(fileURLToPath(import.meta.url));
 const SESSION_DIR = path.join(__dirname, 'test-session', '.test-session-favicon');
-const TARGET_URL  = 'https://github.com/sergey-drpa/gpu-code-docker/blob/main/docker-compose.yaml';
+const TARGET_URL  = 'https://github.com/isharax9/Tab-Suspender/blob/master/README.md';
 
 // ─── SVG test fixtures ────────────────────────────────────────────────────────
 
