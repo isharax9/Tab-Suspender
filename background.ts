@@ -293,6 +293,7 @@ function start() {
 				ignoreList = new IgnoreList();
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 				bgMessageListener = new BGMessageListener(tabManager);
+				UpdateChecker.init();
 
 				setTimeout(() => void trackView('TS started', { version: chrome.runtime.getManifest().version }), 5000);
 

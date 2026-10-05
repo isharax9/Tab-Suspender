@@ -17,6 +17,7 @@ interface PopupQueryBGResponse {
 	sendErrors: any;
 	popup_showWindowSessionByDefault: any;
 	isTabInGroup: boolean;
+	updateInfo?: any;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -59,5 +60,6 @@ async function popupQuery(tab) {
 		sendErrors: await settings.get('sendErrors'),
 		popup_showWindowSessionByDefault: await settings.get('popup_showWindowSessionByDefault'),
 		isTabInGroup: tab.groupId != null && tab.groupId !== -1,
+		updateInfo: typeof UpdateChecker !== 'undefined' ? await UpdateChecker.getCachedInfo() : null,
 	};
 }

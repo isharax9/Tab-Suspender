@@ -257,6 +257,15 @@ class BGMessageListener {
 					sendResponse(popupQueryResult);
 				}).catch(console.error);
 
+				return true; // For async sendResponse()
+			} else if (request.method === '[TS:checkForUpdates]') {
+				UpdateChecker.check(request.force === true).then((updateInfo) => {
+					sendResponse(updateInfo);
+				}).catch((err) => {
+					sendResponse({ error: err.message, updateAvailable: false });
+				});
+				return true; // For async sendResponse()
+
 				/*const tabURLAllowedForPark = TabManager.isTabURLAllowedForPark(request.tab);
 				let parked;
 				try {

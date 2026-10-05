@@ -182,6 +182,8 @@
 
 				if (debug)
 					document.getElementById('tabId').textContent = String(res.tabId);
+
+				initUpdateUI(res.updateInfo);
 			} catch (e) {
 				console.error(e);
 				chrome.runtime.sendMessage({
@@ -191,6 +193,76 @@
 				}).catch(console.error);
 			}
 		});
+
+		function initUpdateUI(cachedUpdateInfo) {
+			const renderUpdateBanner = (info) => {
+				if (!info || !info.updateAvailable) {
+					const banner = document.getElementById('updateBanner');
+					if (banner) banner.style.display = 'none';
+					return;
+				}
+				const banner = document.getElementById('updateBanner');
+				const versionBadge = document.getElementById('updateVersionBadge');
+				const downloadBtn = document.getElementById('downloadUpdateBtn') as HTMLAnchorElement;
+				const notesBtn = document.getElementById('viewReleaseNotesBtn') as HTMLAnchorElement;
+
+				if (banner) {
+					banner.style.display = 'block';
+					if (versionBadge) versionBadge.textContent = 'v' + info.latestVersion;
+					if (downloadBtn) downloadBtn.href = info.downloadUrl || info.releaseUrl;
+					if (notesBtn) notesBtn.href = info.releaseUrl;
+				}
+			};
+
+			if (cachedUpdateInfo) {
+				renderUpdateBanner(cachedUpdateInfo);
+			}
+
+			const closeBtn = document.getElementById('closeUpdateBanner');
+			if (closeBtn) {
+				closeBtn.onclick = () => {
+					const banner = document.getElementById('updateBanner');
+					if (banner) banner.style.display = 'none';
+				};
+			}
+
+			const checkUpdateBtn = document.getElementById('checkUpdateBtn');
+			if (checkUpdateBtn) {
+				checkUpdateBtn.onclick = async () => {
+					checkUpdateBtn.textContent = 'Checking...';
+					try {
+						const res = await chrome.runtime.sendMessage({ method: '[TS:checkForUpdates]', force: true });
+						if (res && res.updateAvailable) {
+							checkUpdateBtn.textContent = 'Update available!';
+							checkUpdateBtn.style.color = '#28a745';
+							renderUpdateBanner(res);
+						} else {
+							checkUpdateBtn.textContent = 'Up to date!';
+							checkUpdateBtn.style.color = '#28a745';
+							setTimeout(() => {
+								checkUpdateBtn.textContent = 'Check for updates';
+								checkUpdateBtn.style.color = '#428bca';
+							}, 3000);
+						}
+					} catch (e) {
+						checkUpdateBtn.textContent = 'Check failed';
+						checkUpdateBtn.style.color = '#d9534f';
+						setTimeout(() => {
+							checkUpdateBtn.textContent = 'Check for updates';
+							checkUpdateBtn.style.color = '#428bca';
+						}, 3000);
+					}
+				};
+			}
+
+			chrome.runtime.sendMessage({ method: '[TS:checkForUpdates]', force: false })
+				.then((info) => {
+					if (info && info.updateAvailable) {
+						renderUpdateBanner(info);
+					}
+				})
+				.catch(() => {});
+		}
 
 		function secondsHumanise(seconds) {
 			if(seconds===0){

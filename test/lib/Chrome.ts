@@ -81,12 +81,32 @@ const mockScripting = {
   executeScript: jest.fn().mockResolvedValue([{ result: 1 }])
 };
 
+const mockAction = {
+  setBadgeText: jest.fn().mockResolvedValue(undefined),
+  getBadgeText: jest.fn().mockResolvedValue(''),
+  setBadgeBackgroundColor: jest.fn().mockResolvedValue(undefined),
+  setTitle: jest.fn().mockResolvedValue(undefined)
+};
+
+const mockNotifications = {
+  create: jest.fn().mockImplementation((id, options, cb) => { if (cb) cb(id); }),
+  onClicked: { addListener: jest.fn() }
+};
+
+const mockAlarms = {
+  create: jest.fn(),
+  onAlarm: { addListener: jest.fn() }
+};
+
 (global as any).chrome = {
   storage: mockStorage,
   tabs: mockTabs,
   windows: mockWindows,
   runtime: mockRuntime,
-  scripting: mockScripting
+  scripting: mockScripting,
+  action: mockAction,
+  notifications: mockNotifications,
+  alarms: mockAlarms
 };
 
 // Mock DOM APIs - use Node.js built-in TextEncoder/TextDecoder

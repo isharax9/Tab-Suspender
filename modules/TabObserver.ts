@@ -1,4 +1,3 @@
-const publicExtensionUrl = 'chrome-extension://fiabciakcmgepblmdkmemdbbkilneeeh/park.html';
 const debugTabsInfo = false;
 
 // @ts-ignore
@@ -219,7 +218,7 @@ class TabObserver {
 
 									const calculatedTabTimeFrame = timeoutSettings + timeoutSettings * tabInfo.parkedCount + (tabInfo.active_time + 1) * Math.log2(tabInfo.swch_cnt + 1) + (timeoutSettings / 4) * Math.log2(tabInfo.swch_cnt + 1);
 
-									if (debug && parkUrl !== publicExtensionUrl)
+									if (debug)
 										chrome.action.setBadgeText({
 											text: '' + Math.round((calculatedTabTimeFrame - tabInfo.time) / 60) + '|' + tabInfo.swch_cnt,
 											tabId: tabId

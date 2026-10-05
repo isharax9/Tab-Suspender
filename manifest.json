@@ -37,7 +37,8 @@
         "storage",
         "scripting",
         "favicon",
-        "offscreen"
+        "offscreen",
+        "alarms"
 		],
     "optional_permissions": [
     ],

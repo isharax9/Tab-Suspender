@@ -26,13 +26,23 @@
     top: 7px;" data-i18n="popupToggle">Toggle</label>
 
 	<div style="width: 350px;height: 27px;text-align: center;user-select: none;">
-		<a id="link" target="_blank" title="__MSG_rateIt__"
-			 href="https://chrome.google.com/webstore/detail/tab-suspender/fiabciakcmgepblmdkmemdbbkilneeeh/reviews"
+		<a id="link" target="_blank" title="GitHub Repository"
+			 href="https://github.com/isharax9/Tab-Suspender"
 			 class="title MSG_extTitle__"></a>
 		<span id="versionSpan" style="color: #ccc;font-size: 7px; cursor: default;user-select: none;">v1.2.9.1</span>
 		<span id="tabId" style="color: #aaa;font-size: 6px;"></span>
-
-
+		<span id="checkUpdateBtn" style="color: #428bca; font-size: 8px; cursor: pointer; margin-left: 6px; user-select: none;" title="Check for updates">Check for updates</span>
+	</div>
+	<div id="updateBanner" style="display:none; margin: 4px 10px 8px 10px; padding: 7px 10px; background: #238636; border-radius: 5px; color: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); font-size: 11px;">
+		<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;">
+			<span style="font-weight: 600; font-size: 11px;">Update Available! <span id="updateVersionBadge" style="background: rgba(255,255,255,0.25); padding: 1px 4px; border-radius: 3px; font-size: 10px;"></span></span>
+			<span id="closeUpdateBanner" style="cursor: pointer; opacity: 0.8; font-size: 13px; line-height: 13px;" title="Dismiss">&times;</span>
+		</div>
+		<div style="font-size: 10px; opacity: 0.95; margin-bottom: 5px;">A new release is ready on GitHub.</div>
+		<div style="display: flex; gap: 6px;">
+			<a id="downloadUpdateBtn" href="#" target="_blank" style="flex: 1; text-align: center; background: #ffffff; color: #238636; font-weight: 600; padding: 3px 6px; border-radius: 3px; text-decoration: none; font-size: 10px;">Download Zip</a>
+			<a id="viewReleaseNotesBtn" href="#" target="_blank" style="flex: 1; text-align: center; background: rgba(255,255,255,0.2); color: #ffffff; font-weight: 600; padding: 3px 6px; border-radius: 3px; text-decoration: none; font-size: 10px;">Release Notes</a>
+		</div>
 	</div>
 	<hr style="
 			margin-top: 0px;

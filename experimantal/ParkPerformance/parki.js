@@ -1,1 +1,0 @@
-	trackErrors('Suspended Page');
