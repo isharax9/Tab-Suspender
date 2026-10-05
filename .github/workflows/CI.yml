@@ -44,7 +44,19 @@ jobs:
       - name: Extract Extension Version
         id: ext_version
         run: |
-          VERSION=$(node -p "require('./build_dir/manifest.json').version")
+          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            TAG_VERSION="${GITHUB_REF_NAME#v}"
+            echo "Release tag detected: $GITHUB_REF_NAME -> version: $TAG_VERSION"
+            node -e "
+              const fs = require('fs');
+              const m = JSON.parse(fs.readFileSync('./build_dir/manifest.json', 'utf8'));
+              m.version = '$TAG_VERSION';
+              fs.writeFileSync('./build_dir/manifest.json', JSON.stringify(m, null, 4));
+            "
+            VERSION="$TAG_VERSION"
+          else
+            VERSION=$(node -p "require('./build_dir/manifest.json').version")
+          fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Building Tab Suspender version: $VERSION"
